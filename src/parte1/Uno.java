@@ -104,7 +104,7 @@ public class Uno {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(scan(args[0]) ? "OK" : "NOPE");
+		System.out.println(Uno.scan1(args[0]) ? "OK" : "NOPE");
 	}
 
 }
