@@ -206,7 +206,7 @@ public int line = 1;
 		//String inputFileName = new File("").getAbsolutePath().concat("\\Input.txt");
 		Lexer lex = new Lexer();
 		String inputFileName = new File("").getAbsolutePath().concat("\\src\\").concat(lex.getClass().getPackage().getName().replace('.', '\\').concat("\\Input.txt"));
-		System.out.println(inputFileName);
+		//System.out.println(inputFileName);
 	    try {
 	    	System.out.println();
 			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
@@ -218,7 +218,9 @@ public int line = 1;
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}catch (NullPointerException e) {
+		System.out.println("ERROR:");
+	}
 		
 		//while(tok.tag != '$');
 		

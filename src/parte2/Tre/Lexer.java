@@ -249,7 +249,9 @@ public class Lexer {
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}catch (NullPointerException e) {
+		System.out.println("ERROR:");
+	}
 
 		// while(tok.tag != '$');
 
