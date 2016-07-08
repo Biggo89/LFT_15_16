@@ -1,4 +1,4 @@
-package parte2.Due;
+package parte2.Tre;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,17 +9,12 @@ import parte2.Uno.Tag;
 import parte2.Uno.Token;
 import parte2.Uno.Word;
 
-/**
- * 
- * @author alessandro.grando
- *
- */
-
 public class Lexer {
-
 	public int line = 1;
 
 	public char peek = ' ';
+
+	private int state;
 
 	Hashtable<String, Word> words = new Hashtable<String, Word>();
 
@@ -27,6 +22,38 @@ public class Lexer {
 		words.put(w.lexeme, w);
 	}
 
+	private boolean javaIdentifier(String str) {
+		state = 0;
+		int i = 0;
+		while (state >= 0 && i < str.length()) {
+			char ch = str.charAt(i++);
+			switch (state) {
+			case 0:
+				if (Character.isLetter(ch))
+					state = 2;
+				else if (ch == '_')
+					state = 1;
+				else
+					state = -1;
+				break;
+			case 2:
+				if (Character.isLetter(ch) || Character.isDigit(ch) || ch == '_')
+					break;
+				else
+					state = -1;
+				break;
+			case 1:
+				if (Character.isDigit(ch) || Character.isLetter(ch))
+					state = 2;
+				else if (ch == '_')
+					break;
+				else
+					state = -1;
+				break;
+			}
+		}
+		return state == 2;
+	}
 
 	public Lexer() {
 		this.reserve(new Word(Tag.VAR, "var"));
@@ -161,27 +188,22 @@ public class Lexer {
 				return null;
 			}
 		default:
-			if (Character.isLetter(peek)) {
+			if (Character.isLetter(peek) || peek == '_') {
 				String s = "";
 				do {
 					s += peek;
 					readch(br);
-				} while (Character.isDigit(peek) || Character.isLetter(peek));
+				} while (Character.isDigit(peek) || Character.isLetter(peek) || peek == '_');
 
 				if ((Word) words.get(s) != null)
 					return (Word) words.get(s);
-				/*else if (this.javaIdentifier(s)) {
+				else if (this.javaIdentifier(s)) {
 					Word w = new Word(Tag.ID, s);
 					words.put(s, w);
 					return w;
 				} else {
 					System.err.println("invalid pattern identifier: " + s);
 					return null;
-				}*/
-				else {
-					Word w = new Word(Tag.ID,s);
-					words.put(s, w);
-					return w;
 				}
 
 			} else {
@@ -232,5 +254,4 @@ public class Lexer {
 		// while(tok.tag != '$');
 
 	}
-
 }

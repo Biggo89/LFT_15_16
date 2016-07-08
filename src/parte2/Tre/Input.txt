@@ -1,4 +1,4 @@
-ale_x,y:integer;
+_____,y:integer;
 if(x == Y) print(x);
 else print (y)
 $
