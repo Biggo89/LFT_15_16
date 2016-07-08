@@ -1,10 +1,19 @@
-package parte2.Uno;
+package parte2.Due;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
+import parte2.Uno.Tag;
+import parte2.Uno.Token;
+import parte2.Uno.Word;
+
+/**
+ * 
+ * @author alessandro.grando
+ *
+ */
 
 public class Lexer {
 
@@ -52,13 +61,13 @@ public int line = 1;
 		this.reserve(new Word(Tag.NOT, "not"));
 		this.reserve(new Word(Tag.TRUE, "true"));
 		this.reserve(new Word(Tag.FALSE, "false"));
-		//this.reserve(new Word(Tag.IF, "if"));
-		//this.reserve(new Word(Tag.THEN, "then"));
-		//this.reserve(new Word(Tag.ELSE, "else"));
-		//this.reserve(new Word(Tag.WHILE, "while"));
-		//this.reserve(new Word(Tag.DO, "do"));
-		//this.reserve(new Word(Tag.BEGIN, "begin"));
-		//this.reserve(new Word(Tag.END, "end"));
+		this.reserve(new Word(Tag.IF, "if"));
+		this.reserve(new Word(Tag.THEN, "then"));
+		this.reserve(new Word(Tag.ELSE, "else"));
+		this.reserve(new Word(Tag.WHILE, "while"));
+		this.reserve(new Word(Tag.DO, "do"));
+		this.reserve(new Word(Tag.BEGIN, "begin"));
+		this.reserve(new Word(Tag.END, "end"));
 	}
 	
 	private void readch(BufferedReader br) {
@@ -186,7 +195,6 @@ public int line = 1;
 				} while (Character.isDigit(peek) || Character.isLetter(peek) || peek == '_');
 				
 				if((Word)words.get(s) != null) return (Word)words.get(s);
-				//nonostante non preveda l'uso di keyword come if,else ecc. li riconosce come identificatori
 				else if(this.javaIdentifier(s)){
 						Word w = new Word(Tag.ID, s);
 						words.put(s, w);
@@ -228,7 +236,7 @@ public int line = 1;
 		//String inputFileName = new File("").getAbsolutePath().concat("\\Input.txt");
 		Lexer lex = new Lexer();
 		String inputFileName = new File("").getAbsolutePath().concat("\\src\\").concat(lex.getClass().getPackage().getName().replace('.', '\\').concat("\\Input.txt"));
-		System.out.println(inputFileName);
+		//System.out.println(inputFileName);
 	    try {
 	    	System.out.println();
 			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
