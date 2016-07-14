@@ -1,4 +1,0 @@
-ale_x,y:integer;
-if(x == Y) print(x);
-else print (y)
-$
