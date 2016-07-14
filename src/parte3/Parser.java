@@ -94,7 +94,7 @@ public class Parser {
 			match(Tag.NUM);
 			break;
 		default:
-			this.error("syntax error");
+			this.error("syntax error near char:" + lex.peek);
 		}
 	}
 
