@@ -3,6 +3,7 @@ package parte2.Uno;
 import java.io.IOException;
 import java.util.Hashtable;
 
+//anche se il lexer non accetta le parole come if else ecc., non va in errore perchè le riconosce come ID
 public class Lexer {
 
 	public int line = 1;
