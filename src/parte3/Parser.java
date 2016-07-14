@@ -99,13 +99,9 @@ public class Parser {
 	}
 
 	public static void main(String[] args) {
-		/*Parser parser = new Parser();
-		parser.start();*/
 		Parser p = new Parser();
 		String inputFileName = new File("").getAbsolutePath().concat("\\src\\")
 				.concat(p.getClass().getPackage().getName().replace('.', '\\').concat("\\InputParser.txt"));
-		//String path =new File("").getAbsolutePath().concat("\\InputParser.txt");
-	    //String inputFileName = path + "InputParser.txt";
 	    try {
 			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
 			Parser parser = new Parser(br);
