@@ -22,7 +22,7 @@ public class Parser {
 
 	private void move() {
 		look = lex.lexical_scan(this.buffer);
-		System.err.println("token = " + look.toString());
+		System.out.println("token = " + look.toString());
 	}
 
 	private void error(String s) {
