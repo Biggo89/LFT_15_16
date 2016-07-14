@@ -67,6 +67,20 @@ public class Lexer {
 		inputFileName = new File("").getAbsolutePath().concat("\\src\\")
 				.concat(this.getClass().getPackage().getName().replace('.', '\\').concat("\\"+inputFileName));
 		this.bufferInizializer(inputFileName);
+		this.reserve(new Word(Tag.VAR, "var"));
+		this.reserve(new Word(Tag.PRINT, "print"));
+		this.reserve(new Word(Tag.BOOLEAN, "boolean"));
+		this.reserve(new Word(Tag.INTEGER, "integer"));
+		this.reserve(new Word(Tag.NOT, "not"));
+		this.reserve(new Word(Tag.TRUE, "true"));
+		this.reserve(new Word(Tag.FALSE, "false"));
+		this.reserve(new Word(Tag.IF, "if"));
+		this.reserve(new Word(Tag.THEN, "then"));
+		this.reserve(new Word(Tag.ELSE, "else"));
+		this.reserve(new Word(Tag.WHILE, "while"));
+		this.reserve(new Word(Tag.DO, "do"));
+		this.reserve(new Word(Tag.BEGIN, "begin"));
+		this.reserve(new Word(Tag.END, "end"));
 	}
 	
 	

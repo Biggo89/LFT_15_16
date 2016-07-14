@@ -31,7 +31,7 @@ public class Tag {
 		case 276: return "DO";
 		case 277: return "BEGIN";
 		case 278: return "END";
-		default: return "OTHER";
+		default: return "MORE";
 		}
 	}
 }
