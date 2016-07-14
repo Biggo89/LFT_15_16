@@ -140,8 +140,7 @@ public class Lexer {
 				peek = ' ';
 				return Word.eq;
 			} else {
-				System.err.println("Erroneous character after = " + peek);
-				return null;
+				return Token.colon;
 			}
 		case '<':
 			readch(br);
@@ -172,20 +171,11 @@ public class Lexer {
 			}
 		case ':':
 			readch(br);
-			if (Character.isLetter(peek)) {
-				String s = "";
-				do {
-					s += peek;
-					readch(br);
-				} while (Character.isDigit(peek) || Character.isLetter(peek));
-				if ((Word) words.get(s) != null)
-					return (Word) words.get(s);
-			} else if (peek == '=') {
+			if (peek == '=') {
 				peek = ' ';
 				return Word.assign;
 			} else {
-				System.err.println("Erroneous character after :" + peek);
-				return null;
+				return Token.colon;
 			}
 		default:
 			if (Character.isLetter(peek) || peek == '_') {
@@ -231,13 +221,9 @@ public class Lexer {
 	}
 
 	public static void main(String[] args) {
-
-		// String inputFileName = new
-		// File("").getAbsolutePath().concat("\\Input.txt");
 		Lexer lex = new Lexer();
 		String inputFileName = new File("").getAbsolutePath().concat("\\src\\")
 				.concat(lex.getClass().getPackage().getName().replace('.', '\\').concat("\\Input.txt"));
-		// System.out.println(inputFileName);
 		try {
 			System.out.println();
 			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
@@ -252,8 +238,5 @@ public class Lexer {
 		} catch (NullPointerException e) {
 			System.out.println("ERROR:");
 		}
-
-		// while(tok.tag != '$');
-
 	}
 }

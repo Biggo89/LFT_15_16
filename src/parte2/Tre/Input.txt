@@ -1,4 +1,4 @@
-_____,y:integer;
-if(x == Y) print(x);
-else print (y)
+var x,y: integer;
+x := (5+2*3/145);
+print(x);
 $
