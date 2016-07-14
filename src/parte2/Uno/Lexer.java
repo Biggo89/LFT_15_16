@@ -1,8 +1,4 @@
 package parte2.Uno;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
 
@@ -25,33 +21,26 @@ public int line = 1;
 		this.reserve(new Word(Tag.NOT, "not"));
 		this.reserve(new Word(Tag.TRUE, "true"));
 		this.reserve(new Word(Tag.FALSE, "false"));
-		//this.reserve(new Word(Tag.IF, "if"));
-		//this.reserve(new Word(Tag.THEN, "then"));
-		//this.reserve(new Word(Tag.ELSE, "else"));
-		//this.reserve(new Word(Tag.WHILE, "while"));
-		//this.reserve(new Word(Tag.DO, "do"));
-		//this.reserve(new Word(Tag.BEGIN, "begin"));
-		//this.reserve(new Word(Tag.END, "end"));
 	}
 	
-	private void readch(BufferedReader br) {
+	private void readch() {
 		try{
-			peek = (char)br.read();
+			peek = (char)System.in.read();
 		}catch(IOException ex){
 			peek = (char) -1;
 		}
 	}
 	
-	private void wsDiscard(BufferedReader br) {
+	private void wsDiscard() {
 		while(peek == ' ' || peek == '\t' || peek == '\n' || peek == '\r')
 		{
 			if(peek == '\n') line++;
-			readch(br);
+			readch();
 		}
 	}
 	
-	public Token lexical_scan(BufferedReader br){
-		wsDiscard(br);
+	public Token lexical_scan(){
+		wsDiscard();
 		switch (peek) {
 		
 		case ',':
@@ -79,7 +68,7 @@ public int line = 1;
 			peek = ' ';
 			return Token.div;
 		case '&':
-			readch(br);
+			readch();
 			if(peek == '&'){
 				peek = ' ';
 				return Word.and;
@@ -88,7 +77,7 @@ public int line = 1;
 				return null;
 			}
 		case '|':
-			readch(br);
+			readch();
 			if(peek == '|'){
 				peek = ' ';
 				return Word.or;
@@ -97,7 +86,7 @@ public int line = 1;
 				return null;
 			}
 		case '=':
-			readch(br);
+			readch();
 			if(peek == '='){
 				peek = ' ';
 				return Word.eq;
@@ -106,7 +95,7 @@ public int line = 1;
 				return null;
 			}
 		case '<':
-			readch(br);
+			readch();
 			if(peek == '='){
 				peek = ' ';
 				return Word.le;
@@ -121,7 +110,7 @@ public int line = 1;
 				return null;
 			}
 		case '>':
-			readch(br);
+			readch();
 			if(peek == '='){
 				peek = ' ';
 				return Word.ge;
@@ -133,12 +122,12 @@ public int line = 1;
 				return null;
 			}
 		case ':':
-			readch(br);
+			readch();
 			if(Character.isLetter(peek)){
 				String s = "";
 				do{
 					s += peek;
-					readch(br);
+					readch();
 				}while(Character.isDigit(peek) || Character.isLetter(peek));
 				if((Word)words.get(s) != null) return (Word)words.get(s);
 			}
@@ -155,7 +144,7 @@ public int line = 1;
 				String s = "";
 				do {
 					s += peek;
-					readch(br);
+					readch();
 				} while (Character.isDigit(peek) || Character.isLetter(peek));
 				
 				if((Word)words.get(s) != null) return (Word)words.get(s);
@@ -178,7 +167,7 @@ public int line = 1;
 					String temp = "";
 					do{
 						temp += peek;
-						readch(br);
+						readch();
 					}while(Character.isDigit(peek));
 					
 					Word w = new Word(Tag.NUM, temp);
@@ -202,11 +191,14 @@ public int line = 1;
 	
 	public static void main(String[] args)
 	{
-		
-		//String inputFileName = new File("").getAbsolutePath().concat("\\Input.txt");
+		Lexer lex = new Lexer();
+		Token tok;
+		do{
+			tok = lex.lexical_scan();
+		}while(tok.tag != Tag.EOF);
+		/* uso del file di input esterno
 		Lexer lex = new Lexer();
 		String inputFileName = new File("").getAbsolutePath().concat("\\src\\").concat(lex.getClass().getPackage().getName().replace('.', '\\').concat("\\Input.txt"));
-		//System.out.println(inputFileName);
 	    try {
 	    	System.out.println();
 			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
@@ -220,7 +212,7 @@ public int line = 1;
 			e.printStackTrace();
 		}catch (NullPointerException e) {
 		System.out.println("ERROR:");
-	}
+	}*/
 		
 		//while(tok.tag != '$');
 		
