@@ -8,8 +8,8 @@ public class Token {
 		this.tag = x;
 	}
 
-	public String ToString() {
-		return "<" + tag + ", " + (char) tag + ">";
+	public String toString() {
+		return "<" + Tag.getName(tag) + ", " + (char) tag + ">";
 	}
 
 	public static final Token comma = new Token(','), colon = new Token(':'), semicolon = new Token(';'),

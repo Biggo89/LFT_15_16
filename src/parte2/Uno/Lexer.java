@@ -195,6 +195,7 @@ public int line = 1;
 		Token tok;
 		do{
 			tok = lex.lexical_scan();
+			System.out.println("Scan:" + tok );
 		}while(tok.tag != Tag.EOF);
 		/* uso del file di input esterno
 		Lexer lex = new Lexer();

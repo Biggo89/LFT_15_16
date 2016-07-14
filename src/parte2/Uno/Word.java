@@ -8,8 +8,8 @@ public class Word extends Token{
 		lexeme = s;
 	}
 
-	public String ToString() {
-		return "<" + tag + ", " + lexeme + ">";
+	public String toString() {
+		return "<" + Tag.getName(tag) + ", " + lexeme + ">";
 	}
 
 	public static final Word and = new Word(Tag.AND, "&&"), or = new Word(Tag.OR, "||"), eq = new Word(Tag.EQ, "=="),

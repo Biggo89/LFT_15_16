@@ -222,7 +222,7 @@ public class Lexer {
 			Token tok;
 			do {
 				tok = lex.lexical_scan(br);
-				System.out.println("Scan: " + tok.ToString());
+				System.out.println("Scan: " + tok.toString());
 			} while (tok.tag != Tag.EOF);
 			br.close();
 		} catch (IOException e) {
