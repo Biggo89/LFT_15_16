@@ -13,6 +13,8 @@ public class Lexer {
 	public int line = 1;
 
 	public char peek = ' ';
+	
+	public BufferedReader br;
 
 	private int state;
 
@@ -22,6 +24,11 @@ public class Lexer {
 		words.put(w.lexeme, w);
 	}
 
+	void bufferInizializer(String inputFileName) throws IOException
+	{
+		this.br = new BufferedReader(new FileReader(inputFileName));
+	}
+	
 	private boolean javaIdentifier(String str) {
 		state = 0;
 		int i = 0;
@@ -55,6 +62,14 @@ public class Lexer {
 		return state == 2;
 	}
 
+	public Lexer(String inputFileName) throws IOException
+	{
+		inputFileName = new File("").getAbsolutePath().concat("\\src\\")
+				.concat(this.getClass().getPackage().getName().replace('.', '\\').concat("\\"+inputFileName));
+		this.bufferInizializer(inputFileName);
+	}
+	
+	
 	public Lexer() {
 		this.reserve(new Word(Tag.VAR, "var"));
 		this.reserve(new Word(Tag.PRINT, "print"));
@@ -221,18 +236,14 @@ public class Lexer {
 	}
 
 	public static void main(String[] args) {
-		Lexer lex = new Lexer();
-		String inputFileName = new File("").getAbsolutePath().concat("\\src\\")
-				.concat(lex.getClass().getPackage().getName().replace('.', '\\').concat("\\Input.txt"));
 		try {
-			System.out.println();
-			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
+			Lexer lex = new Lexer("Input.txt");
 			Token tok;
 			do {
-				tok = lex.lexical_scan(br);
+				tok = lex.lexical_scan(lex.br);
 				System.out.println("Scan: " + tok.toString());
 			} while (tok.tag != Tag.EOF);
-			br.close();
+			lex.br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {

@@ -12,11 +12,12 @@ public class Parser {
 	private Token look;
 	private BufferedReader buffer;
 
-	public Parser(){}
 	
-	public Parser(BufferedReader br) {
+	public Parser(String inputFileName) throws IOException {
+		inputFileName = new File("").getAbsolutePath().concat("\\src\\")
+				.concat(this.getClass().getPackage().getName().replace('.', '\\').concat("\\"+inputFileName));
 		lex = new Lexer();
-		buffer = br;
+		buffer = new BufferedReader(new FileReader(inputFileName));
 		move();
 	}
 
@@ -37,9 +38,10 @@ public class Parser {
 			this.error("syntax error");
 	}
 
-	public void start() {
+	public void start() throws IOException{
 		expr();
 		match(Tag.EOF);
+		this.buffer.close();
 	}
 
 	private void expr() {
@@ -99,14 +101,10 @@ public class Parser {
 	}
 
 	public static void main(String[] args) {
-		Parser p = new Parser();
-		String inputFileName = new File("").getAbsolutePath().concat("\\src\\")
-				.concat(p.getClass().getPackage().getName().replace('.', '\\').concat("\\InputParser.txt"));
+		String inputFileName = "InputParser.txt";
 	    try {
-			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
-			Parser parser = new Parser(br);
+			Parser parser = new Parser(inputFileName);
 			parser.start();
-			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
