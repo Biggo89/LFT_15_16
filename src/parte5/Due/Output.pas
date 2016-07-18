@@ -4,7 +4,7 @@ begin
 	a := 5;
 	b := 6;
 	d := true;
-	e := false;
-	print((a+b) == (5+6));
+	e := true;
+	print( ( (a+b) == (5+6) ) && (d == e ));
 end
 $

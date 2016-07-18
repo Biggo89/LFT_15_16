@@ -54,7 +54,7 @@ public class Instruction {
 			temp = " ifne L" + operand + "\n";
 			break;
 		case iload:
-			temp = " iload" + operand + "\n";
+			temp = " iload " + operand + "\n";
 			break;
 		case imul:
 			temp = " imul \n";
