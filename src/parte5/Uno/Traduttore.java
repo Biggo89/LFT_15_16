@@ -215,19 +215,20 @@ public class Traduttore {
 		case ('*'):
 			match('*');
 			fact_type = fact();
+			//se lo genero dopo mi sballa l'ordine delle operazioni
+			generator.emit(OpCode.imul);
 			multE_p_i = multE_p(fact_type);
 			if (fact_type != Type.INTEGER || multE_p_i != Type.INTEGER)
 				error("tipe mismatch in mulE_p");
-			generator.emit(OpCode.imul);
 			multE_p_i = Type.INTEGER;
 			break;
 		case ('/'):
 			match('/');
 			fact_type = fact();
+			generator.emit(OpCode.idiv);
 			multE_p_i = multE_p(fact_type);
 			if (fact_type != Type.INTEGER || multE_p_i != Type.INTEGER)
 				error("tipe mismatch in addE_p");
-			generator.emit(OpCode.idiv);
 			multE_p_i = Type.INTEGER;
 			break;
 		}
@@ -274,7 +275,7 @@ public class Traduttore {
 
 	public static void main(String[] args) {
         try{
-        	Traduttore translater = new Traduttore("InputTraduttore.txt");
+        	Traduttore translater = new Traduttore("Output.pas");
         	translater.prog();
         }catch(IOException ex)
         {
