@@ -66,7 +66,7 @@ public class Instruction {
 			if(operand == 1)
 				temp = " invokestatic " + "Output/printInt(I)V \n";
 			else 
-				temp = " invokestatic " + "Output/printbool(I)V \n";
+				temp = " invokestatic " + "Output/printBool(I)V \n";
 			break;
 		case ior:
 			temp = " ior \n";
