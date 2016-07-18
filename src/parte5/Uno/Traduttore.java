@@ -75,8 +75,8 @@ public class Traduttore {
 			if (orE_p_i == Type.INTEGER)
 				error("invalid operand for or operation, on orE_p");
 			match(Tag.OR);
-			generator.emit(OpCode.ior);
 			andE_type = andE();
+			generator.emit(OpCode.ior);
 			orE_p_i = orE_p(andE_type);
 			if (andE_type == Type.INTEGER || orE_p_i == Type.INTEGER)
 				error("error in orE_p");
@@ -183,19 +183,19 @@ public class Traduttore {
 		case ('+'):
 			match('+');
 			multE_type = multE();
+			generator.emit(OpCode.iadd);
 			addE_p_i = addE_p(multE_type);
 			if (multE_type != Type.INTEGER || addE_p_i != Type.INTEGER)
 				error("tipe mismatch in addE_p");
-			generator.emit(OpCode.iadd);
 			addE_p_i = Type.INTEGER;
 			break;
 		case ('-'):
 			match('-');
 			multE_type = multE();
+			generator.emit(OpCode.isub);
 			addE_p_i = addE_p(multE_type);
 			if (multE_type != Type.INTEGER || addE_p_i != Type.INTEGER)
 				error("tipe mismatch in addE_p");
-			generator.emit(OpCode.isub);
 			addE_p_i = Type.INTEGER;
 			break;
 		}
