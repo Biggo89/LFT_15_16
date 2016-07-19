@@ -63,8 +63,7 @@ public class Traduttore {
 	}
 
 	private void declist() {
-		if (look.tag == Tag.BOOLEAN || look.tag == Tag.INTEGER) { // insieme
-																	// guida
+		if (look.tag == Tag.BOOLEAN || look.tag == Tag.INTEGER) {
 			dec();
 			match(';');
 			declist();
@@ -109,7 +108,7 @@ public class Traduttore {
 			String id = ((Word) look).lexeme;
 			match(Tag.ID);
 			match(Tag.ASSIGN);
-			stat_type = orE();
+			stat_type = exp();
 			id_type = symbolTable.lookupType(id);
 			if (id_type != stat_type)
 				error("type mismatch in stat");
@@ -119,7 +118,7 @@ public class Traduttore {
 		case Tag.PRINT:
 			match(Tag.PRINT);
 			match('(');
-			stat_type = orE();
+			stat_type = exp();
 			match(')');
 			if (stat_type == Type.INTEGER)
 				generator.emit(OpCode.invokestatic, 1);
@@ -132,40 +131,46 @@ public class Traduttore {
 			match(Tag.END);
 			break;
 		case Tag.WHILE:
-            match(Tag.WHILE);
-            int startL, endL;
-            startL = generator.newLabel();
-            endL = generator.newLabel();
-            generator.emitLabel(startL);
-            stat_type = exp();
-            if(stat_type != Type.BOOLEAN) error("while condition not boolean in stat");
-            generator.emit(OpCode.ldc, 0); //condizione falsa
-            generator.emit(OpCode.if_icmpeq, endL); //controllo su stack
-            match(Tag.DO);
-            stat();
-            generator.emit(OpCode.GOto, startL);
-            generator.emitLabel(endL);
-            break;
-        case Tag.IF:
-            match(Tag.IF);
-            int elseL = generator.newLabel();
-            int doneL = generator.newLabel();
-            stat_type = exp();
-            if(stat_type != Type.BOOLEAN) error("if condition not boolean in stat");
-            generator.emit(OpCode.ldc, 0); //condizione falsa
-            generator.emit(OpCode.if_icmpeq, elseL); //controllo su stack e jump
-            match(Tag.THEN);
-            stat();
-            if(look.tag == Tag.ELSE) {
-                generator.emit(OpCode.GOto, doneL);
-                generator.emitLabel(elseL);
-                match(Tag.ELSE);
-                stat();
-                generator.emitLabel(doneL);
-            }
-            else generator.emitLabel(elseL);
-            break;
+			match(Tag.WHILE);
+			int startL, endL;
+			startL = generator.newLabel();
+			endL = generator.newLabel();
+			generator.emitLabel(startL);
+			stat_type = exp();
+			if (stat_type != Type.BOOLEAN)
+				error("while condition not boolean in stat");
+			generator.emit(OpCode.ldc, 0); // condizione falsa
+			generator.emit(OpCode.if_icmpeq, endL); // controllo su stack
+			match(Tag.DO);
+			stat();
+			generator.emit(OpCode.GOto, startL);
+			generator.emitLabel(endL);
+			break;
+		case Tag.IF:
+			match(Tag.IF);
+			int elseL = generator.newLabel();
+			int doneL = generator.newLabel();
+			stat_type = exp();
+			if (stat_type != Type.BOOLEAN)
+				error("if condition not boolean in stat");
+			generator.emit(OpCode.ldc, 0); // condizione falsa
+			generator.emit(OpCode.if_icmpeq, elseL); // controllo su stack e
+														// jump
+			match(Tag.THEN);
+			stat();
+			if (look.tag == Tag.ELSE) {
+				generator.emit(OpCode.GOto, doneL);
+				generator.emitLabel(elseL);
+				match(Tag.ELSE);
+				stat();
+				generator.emitLabel(doneL);
+			} else
+				generator.emitLabel(elseL);
+			break;
+		default:
+			error("erroneus tag" + look.tag);
 		}
+
 	}
 
 	private void statlist() {
@@ -178,14 +183,14 @@ public class Traduttore {
 			match(';');
 			stat();
 			statlist_p();
-		}
+		} else if (look.tag != Tag.END)
+			error("statlist_p expeted End but found " + look.tag);
 	}
 
-	private Type exp()
-	{
+	private Type exp() {
 		return orE();
 	}
-	
+
 	private Type orE() {
 		Type andE_type, orE_p_type;
 		andE_type = andE();

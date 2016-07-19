@@ -1,15 +1,14 @@
-integer m, n, tmp;
+integer n,r,i;
+
 begin
-   m := 123456;
-   n := 30;
-   while m <> 0 do begin
-      if m < n then begin
-	 tmp := m;
-	 m := n;
-	 n := tmp
-      end;
-      m := m - n
-   end;
-   print(n)
+	n:=4;
+	i:=n;
+	r:=1;
+	while(i>1)do
+		begin
+			r:=r*i;
+			i:=i-1
+		end;
+	print(r)
 end
 $

@@ -179,25 +179,26 @@ public class Lexer {
 			} else if (peek == '>') {
 				peek = ' ';
 				return Word.ne;
-			} else if (peek == ' ') {
+			} /*else if (peek == ' ') {
 				peek = ' ';
 				return Token.lt;
 			} else {
 				System.err.println("Erroneous character after < " + peek);
 				return null;
-			}
+			}*/
+			else return Token.lt;
 		case '>':
 			readch(br);
 			if (peek == '=') {
 				peek = ' ';
 				return Word.ge;
-			} else if (peek == ' ') {
+			} /*else if (peek == ' ') {
 				peek = ' ';
 				return Token.gt;
 			} else {
 				System.err.println("Erroneous character after > " + peek);
 				return null;
-			}
+			}*/else return Token.gt;
 		case ':':
 			readch(br);
 			if (peek == '=') {
