@@ -8,10 +8,10 @@ di variabili in espressioni.
 Il programma prende in input un file Output.pas e crea un file Output.j.
 Il file Output.j viene parsificato dall'assembler Jasmin producendo il bytecode Output.class eseguito successivamente dalla JVM.
 
-LEGENDA:<br/>
-i nomi tra parentesi quadre sono simboli non-terminali mentre tutti gli altri sono simboli terminali;<br/>
-epsilon: stringa vuota;<br/>
-EOF: end of file character, rappresentato dal simbolo $, da inserire alla fine del file.<br/>
+**LEGENDA:**<br/>
+**i nomi tra parentesi quadre sono simboli non-terminali mentre tutti gli altri sono simboli terminali;**<br/>
+**epsilon: stringa vuota;**<br/>
+**EOF: end of file character, rappresentato dal simbolo $, da inserire alla fine del file.**<br/>
 <br/>
 ***La grammatica del linguaggio P è la seguente:***<br/>
 <br/>
