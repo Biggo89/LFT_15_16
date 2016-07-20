@@ -15,7 +15,7 @@ EOF: end of file character, rappresentato dal simbolo $, da inserire alla fine d
 <br/>
 ***La grammatica del linguaggio P è la seguente:***<br/>
 <br/>
-**prog --> [declist] [stat] EOF **<br/>
+**prog --> [declist] [stat] EOF**<br/>
 <br/>
 **declist --> [dec] ; [declist]**<br/>
 **declist --> epsilon**<br/>
@@ -54,11 +54,11 @@ EOF: end of file character, rappresentato dal simbolo $, da inserire alla fine d
 <br/>
 **relE  --> [addE] [relE_p]**<br/>
 <br/>
-**relE p --> == [addE] **<br/>
+**relE p --> == [addE]**<br/>
 **relE_p --> <> [addE]**<br/>
 **relE_p --> <= [addE]**<br/>
-**relE_p --> >= [addE] **<br/>
-**relE_p --> < [addE] **<br/>
+**relE_p --> >= [addE]**<br/>
+**relE_p --> < [addE]**<br/>
 **relE_p --> > [addE]**<br/>
 **relE_p --> epsilon**<br/>
 <br/>
