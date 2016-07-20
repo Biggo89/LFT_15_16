@@ -1,14 +1,12 @@
-integer n,r,i;
-
+integer x,y;
+boolean a;
 begin
-	n:=4;
-	i:=n;
-	r:=1;
-	while(i>1)do
-		begin
-			r:=r*i;
-			i:=i-1
-		end;
-	print(r)
+	x:=2;
+	y:=3;
+	if(x>y)then
+		a:=true
+	else 
+		a:=false;
+	print(a)
 end
 $

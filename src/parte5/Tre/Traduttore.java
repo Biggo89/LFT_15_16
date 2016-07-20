@@ -344,7 +344,6 @@ public class Traduttore {
 		case ('*'):
 			match('*');
 			fact_type = fact();
-			// se lo genero dopo mi sballa l'ordine delle operazioni
 			generator.emit(OpCode.imul);
 			multE_p_i = multE_p(fact_type);
 			if (fact_type != Type.INTEGER || multE_p_i != Type.INTEGER)
