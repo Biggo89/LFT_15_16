@@ -6,7 +6,7 @@ il valore di un’espressione aritmetica-logico, dichiarazione di variabili, ass
 di variabili in espressioni.
 
 Il programma prende in input un file Output.pas e crea un file Output.j.
-Il file Output.j parsificato dall'assembler Jasmin producendo il bytecode Output.class eseguito successivamente dalla JVM.
+Il file Output.j viene parsificato dall'assembler Jasmin producendo il bytecode Output.class eseguito successivamente dalla JVM.
 
 LEGENDA:
 i nomi tra parentesi quadre sono simboli non-terminali mentre tutti gli altri sono simboli terminali;
@@ -79,3 +79,13 @@ fact --> ID
 fact --> NUM
 fact --> true
 fact --> false
+
+ESECUZIONE: compilare tutto il progetto.
+1- Eseguire il traduttore della parte 5.3 che prende di default già in input il file Output.pas(è quì che inserirete il vostro snippet).Se il programma non restituisce errori, restituendo invece tutti i token trovati e riconosciuti, genererà il file output.j.
+2- Il file Output.j dovrà essere l'input dell'assembler Jasmin che genererà il file Output.class tramite il comando "java -jar jasmin.jar Output.j".
+3- Per ultimo non resta altro che eseguire il file Output.class con il comando "java Output".
+
+PS: i punti 2 e 3 sono stati automatizzati dal file Run.bat.
+
+
+
